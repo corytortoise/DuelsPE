@@ -1,5 +1,5 @@
 ### DuelsPE
-#### Extensive, simple, and open source PvP plugin for PocketMine-MP.
+#### Open source PvP plugin for PocketMine-MP.
 
 ### Description:
 Extensive yet simple PvP plugin for PocketMine-MP, based very roughly on Minifixio's 1vs1 plugin.
@@ -8,7 +8,7 @@ Planned Features:
 -> Support for an unlimited amount of arenas.
 -> Completely automatic, and includes a Player Queue for matches. 
 -> Duel your friends!
--> Setting an arena is simple and in-depth.
+-> Setting an arena is simple.
 -> Signs update automatically to show information regarding the queue/arenas.
 -> Extensive API
 
@@ -47,8 +47,7 @@ TODO/Possible ideas:
 
 
 ### Notes:
--> This plugin is Open source. Feel free to contribute. (Just keep it neat!)
-
+-> This plugin is Open source. Feel free to contribute. Just keep it neat, and use PRs to explain what you plan to add.
 -> You can configure many things in this plugin(And hopefully more in the future). Utilizing the config.yml and messages.yml provided with the plugin is encouraged.
 
 -> When /arena 1 or /arena 2 is run, every aspect of your position is saved for the arena. The direction you face when you run the command is given to the player when they join a match.
