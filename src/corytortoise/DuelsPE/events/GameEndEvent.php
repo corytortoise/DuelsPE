@@ -1,0 +1,1 @@
+/* This event will eventually be used to greatly extend the API. It will allow for other plugins to perform actions at the end of each match, and they will be able to get the winner, the loser, etc. I will eventually use this for a stats extension plugin too. */
