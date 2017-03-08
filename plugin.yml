@@ -1,0 +1,6 @@
+name: DuelsPE
+author: corytortoise
+main: corytortoise\DuelsPE\Main
+version: "1.0"
+api: [2.0.0]
+description: 1vs1 plugin for PocketMine-MP based on Minifixio's 1vs1 plugin.
