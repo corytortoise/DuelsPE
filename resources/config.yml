@@ -1,0 +1,37 @@
+#Config File for DuelsPE
+---
+#Plugin by corytortoise
+
+######################
+#            Match Settings          
+######################
+
+#How long the countdown to a match is in seconds.
+countdown: 5
+#How long each round lasts in seconds.
+time-limit: 180
+
+#Whether or not tapping a Duel sign adds you to the queue.
+sign-join: true
+
+#Should kits be forced? If false, players will duel with the items they have with them.
+#If true, their inventories will be cleared and they will receive the configured kits.
+force-kits: true
+
+######################
+#                  Kits          
+######################
+
+#Maybe add more kit plugin support?
+#NOTE: AdvancedKits MUST be enabled on your server.
+advancedkits: true
+#If true, set this to the exact name of the AdvancedKits kit you want to use.
+ak-name: "pvp"
+
+#Kit
+kit:
+  type: custom
+#
+  items:
+  
+

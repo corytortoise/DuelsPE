@@ -1,0 +1,33 @@
+#Language File for DuelsPE. 
+#You may use & or § MCPE color codes.
+---
+####################
+#              General
+####################
+#Message Prefix
+prefix: "&l&7[&e»&r&cDuelsPE&e&l«&7]&r"
+
+####################
+#               Queue
+####################
+#Joining a queue
+queue-join: "&aSearching for a duel..."
+#Found a match
+queue-find: "&aOpponent found!"
+#Already in queue
+in-queue: "&cYou are already in the queue!"
+
+####################
+#                 Duel
+####################
+#%s = Seconds left in countdown
+duel-countdown: "§aDuel starting in %s seconds"
+#%p = Duel Opponent
+duel-start: "§aDuel against %p has started!"
+#%t = Time left in duel. Format: M:SS
+#Will display as popup.
+duel-timer: "§aTime left in duel: %t"
+duel-end: "§aThe Duel has ended!"
+duel-lose: "§cYou lost the duel."
+duel-win: "§aYou won the duel!"
+
