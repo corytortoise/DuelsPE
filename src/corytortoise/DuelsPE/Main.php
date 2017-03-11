@@ -27,7 +27,7 @@
 
     /*** Data File ***/
     private $data;
-  
+
     /*** Kit Option ***/
     private $option;
 
@@ -77,7 +77,7 @@
           $this->getServer()->loadLevel($sign[3]);
         }
         $level = $this->getServer()->getLevelByName($sign[3]);
-        if(
+
       }
     }
 
@@ -89,6 +89,19 @@
       } else {
         $this->option = custom;
       }
+    }
+
+    public function isPlayerInGame(Player $player) {
+      if($this->manager->isPlayerInGame($player)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function onDisable() {
+      $this->manager->shutDown();
+      $this->data->save();
     }
 
   }
