@@ -1,8 +1,8 @@
-### DuelsPE
+### [WIP] DuelsPE
 #### Open source PvP plugin for PocketMine-MP.
 
 ### Description:
-Extensive yet simple PvP plugin for PocketMine-MP, based very roughly on Minifixio's 1vs1 plugin.
+(Unfinished) Extensive yet simple PvP plugin for PocketMine-MP, based very roughly on Minifixio's 1vs1 plugin.
 
 Planned Features:
 -> Support for an unlimited amount of arenas.
