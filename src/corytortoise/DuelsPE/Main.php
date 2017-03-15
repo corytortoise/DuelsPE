@@ -1,5 +1,11 @@
 <?php
 
+  /*
+  * This is the main file in the plugin.
+  * Most of the functions and data management
+  * occurs here.
+  */
+
   namespace corytortoise\DuelsPE;
 
   use pocketmine\plugin\PluginBase;
@@ -37,12 +43,21 @@
     /*** How often to refresh signs ***/
     public $signDelay;
 
+    /*** Players in Queue ***/
+    public $queue = array();
+
+    /*
+    *
+    * Startup and Initialization
+    *
+    */
+
     public function onEnable() {
       $this->saveDefaultConfig();
       if(!is_dir($this->getDataFolder()) {
         mkdir($this->getDataFolder());
       }
-	   $this->data = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
+	    $this->data = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
       $this->config = $this->getConfig();
       $this->saveResource("messages.yml");
       $this->messages = new Config($this->getDataFolder() . "messages.yml");
@@ -64,14 +79,14 @@
       return $prefix . " ";
     }
 
-    public function loadArenas() {
+    private function loadArenas() {
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas...");
       foreach($this->data["arenas"] as $arena) {
         $this->manager->loadArena($arena);
       }
     }
 
-    public function loadSigns() {
+    private function loadSigns() {
       foreach($this->data["signs"] as $sign) {
         if($this->getServer()->isLevelLoaded($sign[3]) !== true) {
           $this->getServer()->loadLevel($sign[3]);
@@ -82,7 +97,7 @@
     }
 
 
-    public function loadKit($kit) {
+    private function loadKit($kit) {
       if(!is_array($kit)) {
         $this->getLogger()->warning("Kit not configured properly. Using default...");
         $this->option = default;
@@ -90,6 +105,12 @@
         $this->option = custom;
       }
     }
+
+    //////////////////////////////////////////////
+    //
+    // API Methods
+    //
+    //////////////////////////////////////////////
 
     public function isPlayerInGame(Player $player) {
       if($this->manager->isPlayerInGame($player)) {
@@ -102,6 +123,60 @@
     public function onDisable() {
       $this->manager->shutDown();
       $this->data->save();
+    }
+
+    /*
+    *
+    * Queue Management
+    *
+    */
+
+    /** @var Player $player */
+    public function addToQueue($player) {
+      array_push($this->queue, $player->getName)
+    }
+
+    public function checkQueue() {
+      if(count($this->queue) > 2) {
+        if()
+      }
+    }
+
+    /*
+    *
+    * Match Management
+    *
+    */
+
+    /** @var Arena $arena */
+    public function endMatch(Arena $arena) {
+
+    }
+
+    /**
+    * This function will return true if a Player is in the defined arena.
+    * It will return false if they are not. Leave $arena null to return the arena they are in.
+    * @var Player $player
+    * @var Arena $arena
+    */
+    public function getPlayerFromMatch($player, $arena = null) {
+      if($arena == null) {
+        if($this->manager->getPlayerArena($player) !== null) {
+          return $this->manager->getPlayerArena($player);
+        } else {
+          return null;
+        }
+      } else {
+        if($this->manager->isPlayerInArena($player, $arena) == true) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+
+    public function getArenaByName($name = "null") {
+      return $this->manager->getArenaByName($name);
     }
 
   }

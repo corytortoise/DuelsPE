@@ -1,5 +1,10 @@
 <?php
 
+  /*
+  * This class holds info for an arena.
+  * TODO: Allow for more info per arena.
+  * TODO: 
+  */
   namespace corytortoise\DuelsPE;
 
   use corytortoise\DuelsPE\Main;
@@ -55,6 +60,10 @@
     // This is used to start a game AFTER the prematch countdown
     public function startGame(array $players) {
 
+    }
+
+    public function getPlayers() {
+      return $this->players;
     }
 
     public function endPreCountdown() {

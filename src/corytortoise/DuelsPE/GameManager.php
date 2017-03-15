@@ -1,5 +1,11 @@
 <?php
 
+  /*
+  * This class handles Arenas,
+  * Loading Kits/Positions,
+  * Etc.
+  */
+
   namespace corytortoise\DuelsPE;
 
   use corytortoise\DuelsPE\Main;
@@ -28,6 +34,7 @@
     public function startArena($player1, $player2) {
       $arena = $this->chooseRandomArena();
       if($arena !== null) {
+        unset($this->plugin->queue[$player1])
         $arena->addPlayers($player1, $player2)
         $arena->start();
       }
@@ -45,5 +52,22 @@
       }
     }
 
+    public function shutDown() {
+
+    }
+    /**
+    * Gets the area of a Player.
+    * TODO: Use Player ID instead of Username for player management
+    *
+    */
+    public function getPlayerArena($player) {
+      foreach($this->arenas as $arena) {
+        foreach($arena->getPlayers() as $p) {
+          if($p == $player->getName()) {
+            return $arena;
+          }
+        }
+      }
+    }
 
   }
