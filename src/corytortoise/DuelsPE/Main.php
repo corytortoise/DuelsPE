@@ -100,9 +100,9 @@
     private function loadKit($kit) {
       if(!is_array($kit)) {
         $this->getLogger()->warning("Kit not configured properly. Using default...");
-        $this->option = default;
+        $this->option = "default";
       } else {
-        $this->option = custom;
+        $this->option = "custom";
       }
     }
 
