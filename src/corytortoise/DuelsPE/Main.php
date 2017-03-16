@@ -71,7 +71,7 @@
       $this->getServer()->getScheduler()->scheduleRepeatingTask($timer, 20);
       $this->signTask = new SignUpdateTask($this);
       $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $this->signDelay * 20);
-      $this->loadKit();
+     // $this->loadKit(); ##DEFINE KITS
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas and signs...");
     }
 
