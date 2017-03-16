@@ -72,6 +72,7 @@
       $this->signTask = new SignUpdateTask($this);
       $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $this->signDelay * 20);
      // $this->loadKit(); ##DEFINE KITS
+      $this->addNewCommands();
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas and signs...");
     }
 
@@ -80,6 +81,19 @@
       $prefix = str_replace("&", "§", $prefix);
       return $prefix . " ";
     }
+	    
+    public function addNewCommands(){
+		$this->registerc(['duel'],new duel($this)); 
+	}
+	    
+    public function registerc($cmd = [], $listener){
+		foreach($cmd as $c){
+		$r = new PluginCommand($c,$this);
+		$r->setExecutor($listener);
+		$r = $this->getServer()->getCommandMap()->register($c,$r);
+		}
+	}  
+	    
 
     private function loadArenas() {
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas...");
