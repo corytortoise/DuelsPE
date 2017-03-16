@@ -17,6 +17,7 @@
 
   //Plugin Files
 
+  use corytortoise\DuelsPE\tasks\SignUpdateTask;
   use corytortoise\DuelsPE\Match;
   use corytortoise\DuelsPE\EventListener;
   use corytortoise\DuelsPE\tasks\GameTimer;
