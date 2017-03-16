@@ -10,5 +10,11 @@
   class SignUpdateTask extends PluginTask {
 
 
-
+   public function onRun($task){
+     
+     
+     
+     
+   }
+    
   }
