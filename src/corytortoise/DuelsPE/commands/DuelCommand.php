@@ -8,12 +8,13 @@
   namespace corytortoise\DuelsPE\commands;
 
   use pocketmine\command\Command;
+  use pocketmine\command\CommandExecutor;
   use pocketmine\command\CommandSender;
   use pocketmine\Player;
 
   use corytortoise\DuelsPE\Main;
 
-  class DuelCommand extends Command {
+  class DuelCommand implements CommandExecutor {
 
   private $plugin;
 
@@ -25,7 +26,7 @@
       $this->plugin = $plugin;
     }
 
-    public function onCommand(CommandSender $sender, $label, $args) {
+    public function onCommand(CommandSender $player, Command $cmd, $label, array $args) {
       if($sender instanceof Player) {
         if(!isset($args[0])) {
           $this->plugin->addToQueue($sender);
