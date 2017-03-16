@@ -39,7 +39,7 @@
     private $option;
 
     /*** GameManager ***/
-    protected $manager;
+    public $manager;
 
     /*** How often to refresh signs ***/
     public $signDelay;
