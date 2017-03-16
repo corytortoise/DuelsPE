@@ -174,9 +174,27 @@
         }
       }
     }
+
     /** @var string $name */
     public function getArenaByName($name = "null") {
       return $this->manager->getArenaByName($name);
+    }
+
+    /* Returns number of arenas */
+    public function getArenaCount() {
+      return count($this->manager->arenas);
+    }
+
+    /* Returns number of active arenas */
+    public function getActiveArenaCount() {
+    $count = 0;
+      foreach($this->manager->arenas as $arena) {
+        if($arena->isActive() === true) {
+          $count++;
+        } else {
+          continue;
+        }
+      }
     }
 
   }

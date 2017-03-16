@@ -22,16 +22,18 @@ force-kits: true
 #                  Kits          
 ######################
 
-#Maybe add more kit plugin support?
-#NOTE: AdvancedKits MUST be enabled on your server.
-advancedkits: true
-#If true, set this to the exact name of the AdvancedKits kit you want to use.
-ak-name: "pvp"
+#Maybe add support for kit plugins later?
 
 #Kit
 kit:
   type: custom
 #
   items:
+  - id: "276:0:1"
+  - id: "364:0:16"
+  - id: "306:0:1"
+  - id: "307:0:1"
+  - id: "308:0:1"
+  - id: "309:0:1"
   
 

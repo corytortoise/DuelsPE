@@ -24,6 +24,7 @@
       if($this->plugin->getServer()->isLevelLoaded($data["level"]) == false) {
         $this->plugin->getServer()->loadLevel($this->plugin->getServer()->getLevelByName($data["level"]));
       }
+
       //TODO: Fix this.
       $spawn1 = new Location($data[0][0], $data[0][1], $data[0][2], $data[0][3], $data[0][4], $data[0][5], $data["level"]);
       $spawn2 = new Location($data[1][0], $data[1][1], $data[1][2], $data[1][3], $data[1][4], $data[1][5], $data["level"]);
@@ -56,7 +57,7 @@
 
     }
     /**
-    * Gets the area of a Player.
+    * Gets the arena of a Player.
     * TODO: Use Player ID instead of Username for player management
     *
     */
