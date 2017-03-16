@@ -57,7 +57,8 @@
       if(!is_dir($this->getDataFolder())) {
         mkdir($this->getDataFolder());
       }
-	    $this->data = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()))->getAll();
+	    $dull = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
+      $this->data = $dull->getAll();
       $this->config = $this->getConfig();
       $this->saveResource("messages.yml");
       $this->messages = new Config($this->getDataFolder() . "messages.yml");
