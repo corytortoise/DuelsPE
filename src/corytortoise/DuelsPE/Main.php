@@ -54,7 +54,7 @@
 
     public function onEnable() {
       $this->saveDefaultConfig();
-      if(!is_dir($this->getDataFolder()) {
+      if(!is_dir($this->getDataFolder())) {
         mkdir($this->getDataFolder());
       }
 	    $this->data = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
