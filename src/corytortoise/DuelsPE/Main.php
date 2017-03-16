@@ -69,7 +69,7 @@
       $this->signDelay = $this->config->get("sign-refresh");
       $timer = new GameTimer($this);
       $this->getServer()->getScheduler()->scheduleRepeatingTask($timer, 20);
-      $signTask = new SignUpdateTask($this);
+      $this->signTask = new SignUpdateTask($this);
       $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $this->signDelay * 20);
       $this->loadKit();
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas and signs...");
