@@ -83,7 +83,7 @@
     }
 	    
     public function addNewCommands(){
-		$this->registerc(['duel'],new duel($this)); 
+		$this->registerc(['DuelCommand'],new duel($this)); 
 	}
 	    
     public function registerc($cmd = [], $listener){
