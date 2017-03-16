@@ -123,7 +123,7 @@
 
     public function onDisable() {
       $this->manager->shutDown();
-      $this->data->save();
+      $this->config->save();
     }
 
     /*
