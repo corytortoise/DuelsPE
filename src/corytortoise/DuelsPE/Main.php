@@ -133,7 +133,7 @@
 
     /** @var Player $player */
     public function addToQueue($player) {
-      array_push($this->queue, $player->getName)
+      array_push($this->queue, $player->getName);
     }
 
     public function checkQueue() {
@@ -159,7 +159,7 @@
     * @var Player $player
     * @var Arena $arena
     */
-    public function getPlayerFromMatch($player, $arena = null) {
+    public function getMatchFromPlayer($player, $arena = null) {
       if($arena == null) {
         if($this->manager->getPlayerArena($player) !== null) {
           return $this->manager->getPlayerArena($player);
@@ -174,7 +174,7 @@
         }
       }
     }
-
+    /** @var string $name */
     public function getArenaByName($name = "null") {
       return $this->manager->getArenaByName($name);
     }
