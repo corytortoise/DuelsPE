@@ -83,16 +83,11 @@
     }
 	    
     public function addNewCommands(){
-		$this->registerc(['DuelCommand'],new duel($this)); 
-	}
-	    
-    public function registerc($cmd = [], $listener){
-		foreach($cmd as $c){
-		$r = new PluginCommand($c,$this);
-		$r->setExecutor($listener);
-		$r = $this->getServer()->getCommandMap()->register($c,$r);
-		}
-	}  
+		$this->registerc(['duel'],new DuelCommand($this)); 
+	    $r = new PluginCommand("duel",$this);
+	    $r->setExecutor(new DuelCommand($this));
+            $r = $this->getServer()->getCommandMap()->register("due",$r);
+    }
 	    
 
     private function loadArenas() {
