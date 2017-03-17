@@ -22,7 +22,6 @@
   private $pos2 = array();
 
     public function __construct(Main $plugin) {
-      parent::__construct("duel", "Main DuelsPE command", "Usage: /duel [ create | join | 1 | 2 | quit ]", ["duel"]);
       $this->plugin = $plugin;
     }
 
