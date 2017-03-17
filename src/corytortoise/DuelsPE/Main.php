@@ -83,7 +83,6 @@
     }
 	    
     public function addNewCommands(){
-		$this->registerc(['duel'],new DuelCommand($this)); 
 	    $r = new PluginCommand("duel",$this);
 	    $r->setExecutor(new DuelCommand($this));
             $r = $this->getServer()->getCommandMap()->register("due",$r);
