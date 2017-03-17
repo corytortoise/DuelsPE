@@ -25,7 +25,7 @@
       $this->plugin = $plugin;
     }
 
-    public function onCommand(CommandSender $player, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
       if($sender instanceof Player) {
         if(!isset($args[0])) {
           $this->plugin->addToQueue($sender);
