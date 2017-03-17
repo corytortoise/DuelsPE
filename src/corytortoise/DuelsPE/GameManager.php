@@ -35,8 +35,8 @@
     public function startArena($player1, $player2) {
       $arena = $this->chooseRandomArena();
       if($arena !== null) {
-        unset($this->plugin->queue[$player1])
-        $arena->addPlayers($player1, $player2)
+        unset($this->plugin->queue[$player1]);
+        $arena->addPlayers($player1, $player2);
         $arena->start();
       }
     }

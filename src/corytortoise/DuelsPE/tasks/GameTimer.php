@@ -5,6 +5,7 @@
   namespace corytortoise\DuelsPE\tasks;
 
   use pocketmine\scheduler\PluginTask;
+  use corytortoise\DuelsPE\Main;
 
   class GameTimer extends PluginTask {
 
