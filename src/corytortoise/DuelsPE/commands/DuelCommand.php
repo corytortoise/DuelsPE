@@ -22,11 +22,10 @@
   private $pos2 = array();
 
     public function __construct(Main $plugin) {
-      parent::__construct("duel", "Main DuelsPE command", "Usage: /duel [ create | join | 1 | 2 | quit ]", ["duel"]);
       $this->plugin = $plugin;
     }
 
-    public function onCommand(CommandSender $player, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
       if($sender instanceof Player) {
         if(!isset($args[0])) {
           $this->plugin->addToQueue($sender);
@@ -47,7 +46,7 @@
               if($this->plugin->isPlayerInQueue($sender) == false) {
                 $this->plugin->removeFromQueue($sender);
               } else {
-                $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue")):
+                $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue"));
               }
 
             break;
@@ -66,7 +65,11 @@
           }
         }
       }
-    }
+      else
+      {
+      $sender->sendMessage($this->getPrefix() . "Please run this command in-game");	
+      }
+      }
 
     public function getPrefix() {
       return $this->plugin->getPrefix();

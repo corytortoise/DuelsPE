@@ -9,6 +9,7 @@
   namespace corytortoise\DuelsPE;
 
   use pocketmine\plugin\PluginBase;
+  use pocketmine\command\PluginCommand;
   use pocketmine\Server;
   use pocketmine\Player;
   use pocketmine\event\Listener;
@@ -83,16 +84,10 @@
     }
 	    
     public function addNewCommands(){
-		$this->registerc(['DuelCommand'],new duel($this)); 
-	}
-	    
-    public function registerc($cmd = [], $listener){
-		foreach($cmd as $c){
-		$r = new PluginCommand($c,$this);
-		$r->setExecutor($listener);
-		$r = $this->getServer()->getCommandMap()->register($c,$r);
-		}
-	}  
+	    $r = new PluginCommand("duel",$this);
+	    $r->setExecutor(new DuelCommand($this));
+            $r = $this->getServer()->getCommandMap()->register("duel",$r);
+    }
 	    
 
     private function loadArenas() {
