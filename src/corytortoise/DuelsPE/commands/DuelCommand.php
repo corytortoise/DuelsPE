@@ -65,7 +65,11 @@
           }
         }
       }
-    }
+      else
+      {
+      $sender->sendMessage($this->getPrefix() . "Please run this command in-game");	
+      }
+      }
 
     public function getPrefix() {
       return $this->plugin->getPrefix();
