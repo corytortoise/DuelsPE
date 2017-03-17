@@ -47,7 +47,7 @@
               if($this->plugin->isPlayerInQueue($sender) == false) {
                 $this->plugin->removeFromQueue($sender);
               } else {
-                $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue")):
+                $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue"));
               }
 
             break;
