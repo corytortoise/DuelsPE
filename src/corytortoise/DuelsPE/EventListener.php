@@ -19,7 +19,7 @@
     public function onDeath(PlayerDeathEvent $event) {
       $player = $event->getPlayer();
       if($this->plugin->isPlayerInGame($player) == true) {
-        $this->plugin->addLoser($player);
+        $this->plugin->manager()->playerDeath($player);
       }
     }
 

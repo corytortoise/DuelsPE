@@ -71,4 +71,17 @@
       }
     }
 
+    public function playerDeath($loser) {
+      $arena = $this->getPlayerArena($loser);
+      // Keeping this for possible 2v2 support later.
+      foreach($arena->getPlayers() as $p) {
+        if($p->getName() !== $loser->getName()) {
+          $winner = $p;
+          break;
+        }
+      }
+      $arena->stop();
+      $this->plugin->getServer()->getPluginManager()->callEvent(new GameEndEvent($this->plugin, $winner, $loser, $arena));
+    }
+
   }

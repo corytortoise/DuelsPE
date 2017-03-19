@@ -3,7 +3,7 @@
   /*
   * This class holds info for an arena.
   * TODO: Allow for more info per arena.
-  * TODO: 
+  * TODO:
   */
   namespace corytortoise\DuelsPE;
 
@@ -68,7 +68,17 @@
 
     public function endPreCountdown() {
       $p = $this->players;
-      $p[0]->teleport($this->)
+    }
+
+    public function endGame($timeout = false) {
+      
+    }
+
+    public function stop() {
+      foreach($this->players as $player) {
+        $player->teleport($player->getSpawn());
+      }
+      $this->active = false;
     }
 
 

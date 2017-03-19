@@ -8,7 +8,7 @@
 
   class GameTimer extends PluginTask {
 
-  private $public;
+  private $plugin;
 
     public function __construct(Main $plugin) {
       parent::__construct($plugin);
