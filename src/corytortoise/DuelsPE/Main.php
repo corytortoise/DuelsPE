@@ -17,6 +17,7 @@
 
   //Plugin Files
 
+  use corytortoise\DuelsPE\tasks\SignUpdateTask;
   use corytortoise\DuelsPE\Match;
   use corytortoise\DuelsPE\EventListener;
   use corytortoise\DuelsPE\tasks\GameTimer;
@@ -38,7 +39,7 @@
     private $option;
 
     /*** GameManager ***/
-    private $manager;
+    public $manager;
 
     /*** How often to refresh signs ***/
     public $signDelay;
@@ -54,10 +55,11 @@
 
     public function onEnable() {
       $this->saveDefaultConfig();
-      if(!is_dir($this->getDataFolder()) {
+      if(!is_dir($this->getDataFolder())) {
         mkdir($this->getDataFolder());
       }
-	    $this->data = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
+	    $dull = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
+      $this->data = $dull->getAll();
       $this->config = $this->getConfig();
       $this->saveResource("messages.yml");
       $this->messages = new Config($this->getDataFolder() . "messages.yml");
@@ -67,9 +69,10 @@
       $this->signDelay = $this->config->get("sign-refresh");
       $timer = new GameTimer($this);
       $this->getServer()->getScheduler()->scheduleRepeatingTask($timer, 20);
-      $signTask = new SignUpdateTask($this);
-      $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $signDelay * 20);
-      $this->loadKit();
+      $this->signTask = new SignUpdateTask($this);
+      $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $this->signDelay * 20);
+     // $this->loadKit(); ##DEFINE KITS
+      $this->addNewCommands();
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas and signs...");
     }
 
@@ -78,6 +81,19 @@
       $prefix = str_replace("&", "§", $prefix);
       return $prefix . " ";
     }
+	    
+    public function addNewCommands(){
+		$this->registerc(['DuelCommand'],new duel($this)); 
+	}
+	    
+    public function registerc($cmd = [], $listener){
+		foreach($cmd as $c){
+		$r = new PluginCommand($c,$this);
+		$r->setExecutor($listener);
+		$r = $this->getServer()->getCommandMap()->register($c,$r);
+		}
+	}  
+	    
 
     private function loadArenas() {
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas...");
@@ -100,9 +116,9 @@
     private function loadKit($kit) {
       if(!is_array($kit)) {
         $this->getLogger()->warning("Kit not configured properly. Using default...");
-        $this->option = default;
+        $this->option = "default";
       } else {
-        $this->option = custom;
+        $this->option = "custom";
       }
     }
 
@@ -122,7 +138,7 @@
 
     public function onDisable() {
       $this->manager->shutDown();
-      $this->data->save();
+      $this->config->save();
     }
 
     /*
@@ -138,9 +154,9 @@
 
     public function checkQueue() {
       if(count($this->queue) > 2) {
-        if()
+      //  if() ##TO-DO
       }
-    }
+    } 
 
     /*
     *
