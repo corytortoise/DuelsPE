@@ -24,11 +24,11 @@ class GameEndEvent extends PluginEvent {
 	/** @var Arena */
 	private $arena;
 
-  /**	
- 	* @param Main $plugin
-	 * @param Player            $winner
-	 * @param Player          $looser
-	 * @param Arena             $arena
+       /**	
+ 	* @param Main           $plugin
+	 * @param Player	$winner
+	 * @param Player	$looser
+	 * @param Arena	        $arena
 	 */
 	public function __construct(Main $plugin, Player $winner, Player $loser, Arena $arena) {
 		parent::__construct($plugin);
