@@ -5,42 +5,57 @@
   * I will eventually use this for a stats extension plugin too.
   * Implementing Cancellable is probably unnecessary, but I'll do it anyway.
   */
+namespace corytortoise\DuelsPE\events;
 
-  namespace corytortoise\DuelsPE\events;
+use pocketmine\event\plugin\PluginEvent;
+use pocketmine\event\Cancellable;
+use pocketmine\Player;
 
-  use pocketmine\event\plugin\PluginEvent;
-  use pocketmine\event\Cancellable;
-  use pocketmine\Player;
+use corytortoise\DuelsPE\Main;
+use corytortoise\DuelsPE\Arena;
 
-  use corytortoise\DuelsPE\Main;
+class GameEndEvent extends PluginEvent {
+	/** @var Main */
+	private $plugin;
+	/** @var Player */
+	private $winner;
+	/** @var Player */
+	private $loser;
+	/** @var Arena */
+	private $arena;
 
-  class GameEndEvent extends PluginEvent implements Cancellable {
+       /**	
+ 	* @param Main           $plugin
+	 * @param Player	$winner
+	 * @param Player	$looser
+	 * @param Arena	        $arena
+	 */
+	public function __construct(Main $plugin, Player $winner, Player $loser, Arena $arena) {
+		parent::__construct($plugin);
+		$this->plugin = $plugin;
+		$this->winner = $winner;
+		$this->loser = $loser;
+		$this->arena = $arena;
+	}
 
-    private $plugin;
+	/**
+	 * @return Player
+	 **/
+	public function getWinner() {
+		return $this->winner;
+	}
 
-    private $winner;
-    private $loser;
+	/**
+	 * @return Player
+	 **/
+	public function getLoser() {
+		return $this->loser;
+	}
 
-    private $arena;
-
-    public function __construct(Main $plugin, Player $winner, Player $loser, Arena $arena) {
-      parent::__construct($plugin);
-      $this->plugin = $plugin;
-      $this->winner = $winner;
-      $this->loser = $loser;
-      $this->arena = $arena;
-    }
-
-    public function getWinner() {
-      return $this->winner;
-    }
-
-    public function getLoser() {
-      return $this->loser;
-    }
-
-    public function getArena() {
-      return $this->arena;
-    }
-
-  }
+	/**
+	 * @return Arena
+	 **/
+	public function getArena() {
+		return $this->arena;
+	}
+}
