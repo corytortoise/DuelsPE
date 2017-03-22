@@ -22,5 +22,11 @@
         $this->plugin->manager()->playerDeath($player);
       }
     }
-
+    
+    public function onDeath(PlayerQuitEvent $event) {
+      $player = $event->getPlayer();
+      if($this->plugin->isPlayerInGame($player) == true) {
+        $this->plugin->manager()->playerDeath($player);
+      }
+    }
   }
