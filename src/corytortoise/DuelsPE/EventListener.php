@@ -18,14 +18,14 @@
 
     public function onDeath(PlayerDeathEvent $event) {
       $player = $event->getPlayer();
-      if($this->plugin->isPlayerInGame($player) == true) {
+      if($this->plugin->isPlayerInGame($player) === true) {
         $this->plugin->manager()->playerDeath($player);
       }
     }
     
-    public function onDeath(PlayerQuitEvent $event) {
+    public function onQuit(PlayerQuitEvent $event) {
       $player = $event->getPlayer();
-      if($this->plugin->isPlayerInGame($player) == true) {
+      if($this->plugin->isPlayerInGame($player) === true) {
         $this->plugin->manager()->playerDeath($player);
       }
     }
