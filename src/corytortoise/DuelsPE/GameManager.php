@@ -27,7 +27,7 @@
 
       //TODO: Fix this.
       $spawn1 = new Location($data[0][0], $data[0][1], $data[0][2], $data[0][3], $data[0][4], $data[0][5], $data["level"]);
-      $spawn2 = new Location($data[1][6], $data[1][7], $data[1][8], $data[1][9], $data[1][10], $data[1][11], $data["level"]);
+      $spawn2 = new Location($data[1][0], $data[1][1], $data[1][2], $data[1][3], $data[1][4], $data[1][5], $data["level"]);
       $arena = new Arena($this, $spawn1, $spawn2);
       array_push($this->arenas, $arena);
     }
