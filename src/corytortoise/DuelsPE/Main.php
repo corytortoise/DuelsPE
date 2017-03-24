@@ -16,10 +16,8 @@
   //Plugin Files
 
   use corytortoise\DuelsPE\tasks\SignUpdateTask;
-  use corytortoise\DuelsPE\Match;
   use corytortoise\DuelsPE\EventListener;
   use corytortoise\DuelsPE\tasks\GameTimer;
-  use corytortoise\DuelsPE\tasks\CheckTask;
   use corytortoise\DuelsPE\commands\DuelCommand;
 
     class Main extends PluginBase {
@@ -56,9 +54,9 @@
       if(!is_dir($this->getDataFolder())) {
         mkdir($this->getDataFolder());
       }
-	    $dull = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
-      $this->data = $dull->getAll();
+      $this->data = new Config($this->getDataFolder() . "data.yml", Config::YAML,array("arenas" => array(), "signs" => array()));
       $this->config = $this->getConfig();
+      $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
       $this->saveResource("messages.yml");
       $this->messages = new Config($this->getDataFolder() . "messages.yml");
       $this->manager = new GameManager($this);
@@ -69,8 +67,8 @@
       $this->getServer()->getScheduler()->scheduleRepeatingTask($timer, 20);
       $this->signTask = new SignUpdateTask($this);
       $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $this->signDelay * 20);
-     // $this->loadKit(); ##DEFINE KITS
-      $this->addNewCommands();
+      $this->loadKit();
+      $this->registerCommand();
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas and signs...");
     }
 
@@ -125,11 +123,6 @@
       }
     }
 
-    public function onDisable() {
-      $this->manager->shutDown();
-      $this->config->save();
-    }
-
     /*
     *
     * Queue Management
@@ -143,9 +136,19 @@
 
     public function checkQueue() {
       if(count($this->queue) > 2) {
-      //  if() ##TO-DO
+        if($this->isArenaAvailable()) {
+          $this->manager->startAr
+        }
       }
     } 
+    
+    public function isArenaAvailable() {
+      if($this->getArenaCount() - $this->getActiveArenaCount() >= 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
     /*
     *
@@ -202,4 +205,11 @@
       }
     }
 
+    public function onDisable() {
+      $this->manager->shutDown();
+      $this->config->save();
+    }
+    
   }
+  
+  
