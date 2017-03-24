@@ -9,9 +9,7 @@
   namespace corytortoise\DuelsPE;
 
   use pocketmine\plugin\PluginBase;
-  use pocketmine\Server;
   use pocketmine\Player;
-  use pocketmine\event\Listener;
   use pocketmine\utils\Config;
   use pocketmine\utils\TextFormat as C;
 
@@ -78,22 +76,13 @@
 
     public function getPrefix() {
       $prefix = $this->config->get("prefix");
-      $prefix = str_replace("&", "§", $prefix);
-      return $prefix . " ";
+      $finalPrefix = str_replace("&", "§", $prefix);
+      return $finalPrefix . " ";
     }
 	    
-    public function addNewCommands(){
-		$this->registerc(['DuelCommand'],new duel($this)); 
-	}
-	    
-    public function registerc($cmd = [], $listener){
-		foreach($cmd as $c){
-		$r = new PluginCommand($c,$this);
-		$r->setExecutor($listener);
-		$r = $this->getServer()->getCommandMap()->register($c,$r);
-		}
-	}  
-	    
+    public function registerCommand() {
+        $this->getServer()->getCommandMap()->registerCommand("duel", new DuelCommand($this));
+    }
 
     private function loadArenas() {
       $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas...");
@@ -166,7 +155,7 @@
 
     /** @var Arena $arena */
     public function endMatch(Arena $arena) {
-
+        $arena->stop();
     }
 
     /**

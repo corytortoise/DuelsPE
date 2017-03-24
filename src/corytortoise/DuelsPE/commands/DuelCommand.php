@@ -8,13 +8,12 @@
   namespace corytortoise\DuelsPE\commands;
 
   use pocketmine\command\Command;
-  use pocketmine\command\CommandExecutor;
   use pocketmine\command\CommandSender;
   use pocketmine\Player;
 
   use corytortoise\DuelsPE\Main;
 
-  class DuelCommand implements CommandExecutor {
+  class DuelCommand extends Command {
 
   private $plugin;
 
@@ -26,16 +25,18 @@
       $this->plugin = $plugin;
     }
 
-    public function onCommand(CommandSender $player, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
       if($sender instanceof Player) {
         if(!isset($args[0])) {
-          $this->plugin->addToQueue($sender);
+          if($this->plugin->isPlayerInQueue($sender) == false) {
+            $this->plugin->addToQueue($sender);
+          }
         } else {
 
         switch($args[0]) {
 
             case "join":
-              if($this->plugin->isPlayerInQueue($sender) == false) {
+              if($this->plugin->isPlayerInQueue($sender) === false) {
                 $this->plugin->addToQueue($sender);
               } else {
                 $sender->sendMessage($this->getPrefix() . $this->getMessage("in-queue"));
@@ -44,10 +45,10 @@
 
             case "quit":
             case "leave":
-              if($this->plugin->isPlayerInQueue($sender) == false) {
+              if($this->plugin->isPlayerInQueue($sender) === false) {
                 $this->plugin->removeFromQueue($sender);
               } else {
-                $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue")):
+                $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue"));
               }
 
             break;

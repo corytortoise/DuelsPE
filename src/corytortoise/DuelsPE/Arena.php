@@ -7,7 +7,6 @@
   */
   namespace corytortoise\DuelsPE;
 
-  use corytortoise\DuelsPE\Main;
   use corytortoise\DuelsPE\GameManager;
 
   class Arena {
@@ -70,16 +69,12 @@
       $p = $this->players;
     }
 
-    public function endGame($timeout = false) {
-      
-    }
-
-    public function stop() {
+    public function stop($cause = "") {
       foreach($this->players as $player) {
-        $player->teleport($player->getSpawn());
+        if($player->isOnline() === true) {
+          
+        }
       }
-      $this->active = false;
     }
-
 
   }

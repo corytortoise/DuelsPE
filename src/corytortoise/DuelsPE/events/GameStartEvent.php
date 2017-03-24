@@ -9,7 +9,6 @@
 
   use pocketmine\event\plugin\PluginEvent;
   use pocketmine\event\Cancellable;
-  use pocketmine\Player;
 
   use corytortoise\DuelsPE\Main;
 
@@ -21,7 +20,7 @@
 
     private $arena;
 
-    public function __construct(Main $plugin, Player[] $players, Arena $arena) {
+    public function __construct(Main $plugin, $players, Arena $arena) {
       parent::__construct($plugin);
       $this->plugin = $plugin;
       $this->players = $players;
