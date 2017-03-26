@@ -25,6 +25,7 @@ A: This is a question you should be asking yourself. Frankly, I won't(and can't)
 ##To Do List:
 ---
  - [ ] Stable, operational plugin.
+ - [ ] Spectate after death.
  - [ ] Support different languages.
  - [ ] Status/Join signs for matches.
  - [ ] Duel friends with command

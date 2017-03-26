@@ -99,7 +99,10 @@
       }
     }
 
-
+    /**
+     * 
+     * @param type $kit
+     */
     private function loadKit($kit) {
       if(!is_array($kit)) {
         $this->getLogger()->warning("Kit not configured properly. Using default...");
@@ -115,6 +118,11 @@
     //
     //////////////////////////////////////////////
 
+    /**
+     * 
+     * @param Player $player
+     * @return boolean
+     */
     public function isPlayerInGame(Player $player) {
       if($this->manager->isPlayerInGame($player)) {
         return true;
@@ -137,7 +145,7 @@
     public function checkQueue() {
       if(count($this->queue) > 2) {
         if($this->isArenaAvailable()) {
-          $this->manager->startAr
+          $this->manager->startArena(array_shift($this->queue), array_shift($this->queue));
         }
       }
     } 
@@ -156,7 +164,10 @@
     *
     */
 
-    /** @var Arena $arena */
+    /**
+     * 
+     * @param \corytortoise\DuelsPE\Arena $arena
+     */
     public function endMatch(Arena $arena) {
         $arena->stop();
     }
@@ -183,12 +194,19 @@
       }
     }
 
-    /** @var string $name */
+    /**
+     * 
+     * @param type $name
+     * @return type
+     */
     public function getArenaByName($name = "null") {
       return $this->manager->getArenaByName($name);
     }
 
-    /* Returns number of arenas */
+    /**
+     * 
+     * @return int Arenas
+     */
     public function getArenaCount() {
       return count($this->manager->arenas);
     }

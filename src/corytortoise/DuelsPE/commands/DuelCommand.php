@@ -28,7 +28,7 @@
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
       if($sender instanceof Player) {
         if(!isset($args[0])) {
-          if($this->plugin->isPlayerInQueue($sender) == false) {
+          if(!$this->plugin->isPlayerInQueue($sender)) {
             $this->plugin->addToQueue($sender);
           }
         } else {
@@ -36,8 +36,12 @@
         switch($args[0]) {
 
             case "join":
-              if($this->plugin->isPlayerInQueue($sender) === false) {
+              if(!$this->plugin->isPlayerInQueue($sender)) {
+                if(!$this->plugin->isPlayerInGame($sender)) {
                 $this->plugin->addToQueue($sender);
+                } else {
+                  $sender->sendMessage($this->getPrefix() . $this->getMessage("in-game"))
+                }
               } else {
                 $sender->sendMessage($this->getPrefix() . $this->getMessage("in-queue"));
               }
@@ -45,7 +49,7 @@
 
             case "quit":
             case "leave":
-              if($this->plugin->isPlayerInQueue($sender) === false) {
+              if($this->plugin->isPlayerInQueue($sender)) {
                 $this->plugin->removeFromQueue($sender);
               } else {
                 $sender->sendMessage($this->getPrefix() . $this->getMessage("not-in-queue"));

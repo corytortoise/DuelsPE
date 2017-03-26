@@ -8,7 +8,6 @@
 
   //DuelsPE Files
   use corytortoise\DuelsPE\Main;
-  use corytortoise\DuelsPE\GameManager;
 
   class EventListener implements Listener {
 
