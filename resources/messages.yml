@@ -6,12 +6,19 @@
 ####################
 #Message Prefix
 prefix: "&l&7[&e»&r&cDuelsPE&e&l«&7]&r"
+#Creating an Arena
+no-perm: "&cYou do not have permission to create Arenas!"
+#Command Usage
+command-usage: "&6Usage: /duel [join | quit | 1 | 2 | create]"
+pos1-set: "&aPosition 1 set!"
+pos2-set: "&aPosition 2 set!"
+arena-set: "&aArena successfully created!"
 
 ####################
 #               Queue
 ####################
 #Joining a queue
-queue-join: "&aSearching for a duel..."
+queue-join: "&aLooking for a match..."
 #Found a match
 queue-find: "&aOpponent found!"
 #Already in queue
@@ -32,7 +39,4 @@ duel-timer: "&aTime left in duel: %t"
 duel-end: "&aThe Duel has ended!"
 duel-lose: "&cYou lost the duel."
 duel-win: "&aYou won the duel!"
-
-
-#Leave this here, it is the fallback message
-null: "&cUh oh, no message here!"
+in-game: "&cYou are already in a duel..."

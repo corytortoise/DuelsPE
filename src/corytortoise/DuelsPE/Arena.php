@@ -24,6 +24,7 @@
 
     private $active = false;
 
+    private $timer = 190;
     private $beforeMatch = 10;
     private $matchTime = 180;
 
@@ -40,6 +41,7 @@
       $this->beforeMatch = $manager->plugin->config->get("match-countdown");
       $this->matchTime = $manager->plugin->config->get("time-limit");
       $this->timer = $this->beforeMatch + $this->matchTime;
+      $this->teamCount = $teamCount;
     }
 
     public function start() {
@@ -77,7 +79,7 @@
      }
      if ($this->timer <= 0) {
        // Timer has run out, so game should end.
-       $this->endGame(true);
+       $this->stop("you ran out of time!");
      }
     }
 
@@ -106,13 +108,13 @@
     }
     
     /**
-     * 
+     * This can be used by other plugins to force stop a duel.
      * @param type $cause
      */
     public function stop($cause = "") {
       foreach($this->players as $player) {
-        if($player->isOnline() === true) {
-          $player->sendMessage("Duel was stopped. Reason: " . $cause);
+        if($player->isOnline()) {
+          $player->sendMessage($this->manager->plugin->getPrefix() . "Duel was stopped because " . $cause);
           $player->teleport($player->getSpawn());
           
         }

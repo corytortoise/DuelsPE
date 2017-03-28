@@ -7,7 +7,7 @@
 ######################
 
 #How long the countdown to a match is in seconds.
-countdown: 5
+match-countdown: 5
 #How long each round lasts in seconds.
 time-limit: 180
 

@@ -11,7 +11,7 @@
   use pocketmine\plugin\PluginBase;
   use pocketmine\Player;
   use pocketmine\utils\Config;
-  use pocketmine\utils\TextFormat as C;
+  use pocketmine\utils\TextFormat;
 
   //Plugin Files
 
@@ -69,7 +69,8 @@
       $this->getServer()->getScheduler()->scheduleRepeatingTask($this->signTask, $this->signDelay * 20);
       $this->loadKit();
       $this->registerCommand();
-      $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas and signs...");
+      $this->getLogger()->notice($this->getPrefix() . TextFormat::YELLOW . "Loading arenas and signs...");
+      $this->getLogger()->notice($this->getPrefix() . TextFormat::GREEN . "Loaded " . count(array_keys($this->manager->arenas)) . " Arenas!");
     }
 
     public function getPrefix() {
@@ -111,6 +112,21 @@
         $this->option = "custom";
       }
     }
+    
+    /**
+     * 
+     * @param string $message
+     * @return string $finalMessage
+     */
+    public function getMessage(string $message = "") {
+      $msg = $this->messages->get($message);
+      if($msg != null) {
+      $finalMessage = str_replace("&", TextFormat::ESCAPE, $msg);
+      return $finalMessage;
+      } else {
+        return $this->getPrefix() . "Uh oh, no message found!";
+      }
+    }
 
     //////////////////////////////////////////////
     //
@@ -139,11 +155,13 @@
 
     /** @var Player $player */
     public function addToQueue($player) {
+      $player->sendMessage($this->getPrefix() . $this->getMessage("queue-join"));
       array_push($this->queue, $player->getName);
     }
 
     public function checkQueue() {
       if(count($this->queue) > 2) {
+        //TODO: Rework this for teams.
         if($this->isArenaAvailable()) {
           $this->manager->startArena(array_shift($this->queue), array_shift($this->queue));
         }
