@@ -1,9 +1,10 @@
 <?php
 
-  /*
-  * This class handles Arenas,
-  * Loading Kits/Positions,
-  * Etc.
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
   */
 
   namespace corytortoise\DuelsPE;

@@ -1,6 +1,11 @@
 <?php
 
-  /* This task will take one second from each active match. */
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
+  */
 
   namespace corytortoise\DuelsPE\tasks;
 
@@ -18,7 +23,7 @@
 
     public function onRun($currentTick) {
       foreach($this->plugin->manager->arenas as $arena) {
-        if($arena->isActive() == true) {
+        if($arena->isActive()) {
         $arena->tick();
         }
       }

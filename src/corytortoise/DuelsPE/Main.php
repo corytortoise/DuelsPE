@@ -1,9 +1,10 @@
 <?php
 
-  /*
-  * This is the main file in the plugin.
-  * Most of the functions and data management
-  * occurs here.
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
   */
 
   namespace corytortoise\DuelsPE;
@@ -118,7 +119,7 @@
      * @param string $message
      * @return string $finalMessage
      */
-    public function getMessage(string $message = "") {
+    public static function getMessage(string $message = "") {
       $msg = $this->messages->get($message);
       if($msg != null) {
       $finalMessage = str_replace("&", TextFormat::ESCAPE, $msg);
@@ -153,10 +154,13 @@
     *
     */
 
-    /** @var Player $player */
-    public function addToQueue($player) {
+    /**
+     * Adds a specific pocketmine\Player to the queue.
+     * @param Player $player
+     */
+    public function addToQueue(Player $player) {
       $player->sendMessage($this->getPrefix() . $this->getMessage("queue-join"));
-      array_push($this->queue, $player->getName);
+      array_push($this->queue, $player->getName());
     }
 
     public function checkQueue() {

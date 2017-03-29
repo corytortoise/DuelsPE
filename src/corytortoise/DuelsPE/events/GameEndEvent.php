@@ -1,10 +1,12 @@
 <?php
 
-  /* This event will be called when a match ends.
-  * It will allow for other plugins to perform actions at the end of each match, and they will be able to get the winner, the loser, etc.
-  * I will eventually use this for a stats extension plugin too.
-  * Implementing Cancellable is probably unnecessary, but I'll do it anyway.
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
   */
+
 namespace corytortoise\DuelsPE\events;
 
 use pocketmine\event\plugin\PluginEvent;

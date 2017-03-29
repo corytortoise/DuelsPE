@@ -1,8 +1,10 @@
 <?php
 
-  /*
-  * This Class will handle all commands and getting positions of players when they do /duel 1 or /duel 2.
-  * Maybe that should be moved to the main class?
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
   */
 
   namespace corytortoise\DuelsPE\commands;

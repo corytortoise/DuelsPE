@@ -1,10 +1,12 @@
 <?php
 
-  /*
-  * This class holds info for an arena.
-  * TODO: Allow for more info per arena.
-  * TODO:
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
   */
+    
   namespace corytortoise\DuelsPE;
 
   use corytortoise\DuelsPE\GameManager;
@@ -17,10 +19,6 @@
     private $spawn2;
 
     private $players = array();
-    
-    private $team1 = array();
-    private $team2 = array();
-    private $teamCount = 2;
 
     private $active = false;
 
@@ -34,14 +32,13 @@
      * @param type $spawn1
      * @param type $spawn2
      */
-    public function __construct(GameManager $manager, $spawn1, $spawn2, $teamCount = 1) {
+    public function __construct(GameManager $manager, $spawn1, $spawn2) {
       $this->manager = $manager;
       $this->spawn1 = $spawn1;
       $this->spawn2 = $spawn2;
       $this->beforeMatch = $manager->plugin->config->get("match-countdown");
       $this->matchTime = $manager->plugin->config->get("time-limit");
       $this->timer = $this->beforeMatch + $this->matchTime;
-      $this->teamCount = $teamCount;
     }
 
     public function start() {
@@ -55,11 +52,7 @@
     public function addPlayers(array $players) {
       foreach($players as $p) {
         $this->players[] = $p;
-        if($this->team1 <= $this->teamCount) {
-          $this->team1[] = $p;
-        } else {
-          $this->team2[] = $p;
-        }
+        $this->addNoticeSubscriber($p);
       }
     }
 
@@ -80,6 +73,12 @@
      if ($this->timer <= 0) {
        // Timer has run out, so game should end.
        $this->stop("you ran out of time!");
+     } 
+     if($this->timer - $this->beforeMatch > $this->matchTime) {
+       $seconds = $this->timer - $this->beforeMatch;
+       foreach($this->getPlayers() as $p) {
+         $p->sendPopup(str_replace("%s", $seconds, Main::getMessage("duel-countdown")));
+       }
      }
     }
 
@@ -92,9 +91,19 @@
       return $this->players;
     }
     
+    public function getOpponent($player) {
+      foreach($this->getPlayers() as $p) {
+        if($player != $p) {
+          return $p;
+        }
+      }
+    }
 
     public function endPreCountdown() {
-      $p = $this->players;
+      foreach($this->getPlayers() as $p) {
+        $opposite = $this->getOpponent($p);
+        $p->sendPopup(str_replace("%p", $opposite, Main::getMessage("duel-start")));
+      }
     }
     
     /**

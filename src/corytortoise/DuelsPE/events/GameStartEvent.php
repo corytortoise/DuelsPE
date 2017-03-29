@@ -1,10 +1,12 @@
 <?php
     
- /* This event will be called at the beginning of each match.
-  * Possible uses include custom arena starting, like giving both players effects
-  * or something.
+  /* ____             _     ____  _____ 
+  * |  _ \ _   _  ___| |___|  _ \| ____|
+  * | | | | | | |/ _ \ / __| |_) |  _|  
+  * | |_| | |_| |  __/ \__ \  __/| |___ 
+  * |____/ \__,_|\___|_|___/_|   |_____|
   */
-  
+
   namespace corytortoise\DuelsPE\events;
 
   use pocketmine\event\plugin\PluginEvent;
