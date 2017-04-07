@@ -81,7 +81,7 @@
     }
 	    
     public function registerCommand() {
-        $this->getServer()->getCommandMap()->registerCommand("duel", new DuelCommand($this));
+        $this->getServer()->getCommandMap()->registerCommand("duel", new DuelCommand("duel", $this));
     }
 
     private function loadArenas() {

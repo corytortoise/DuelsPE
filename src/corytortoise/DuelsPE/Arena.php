@@ -8,6 +8,8 @@
   */
     
   namespace corytortoise\DuelsPE;
+  
+  use pocketmine\level\Location;
 
   use corytortoise\DuelsPE\GameManager;
 
@@ -29,10 +31,10 @@
     /**
      * 
      * @param GameManager $manager
-     * @param type $spawn1
-     * @param type $spawn2
+     * @param Location $spawn1
+     * @param Location $spawn2
      */
-    public function __construct(GameManager $manager, $spawn1, $spawn2) {
+    public function __construct(GameManager $manager, Location $spawn1, Location $spawn2) {
       $this->manager = $manager;
       $this->spawn1 = $spawn1;
       $this->spawn2 = $spawn2;
@@ -52,7 +54,6 @@
     public function addPlayers(array $players) {
       foreach($players as $p) {
         $this->players[] = $p;
-        $this->addNoticeSubscriber($p);
       }
     }
 
@@ -65,26 +66,35 @@
     }
 
     public function tick() {
-     $this->timer--;
-     if($this->timer - $this->beforeMatch === $this->matchTime) {
-       // Prematch countdown is over, so the round should start.
-       $this->endPreCountdown();
-     }
-     if ($this->timer <= 0) {
-       // Timer has run out, so game should end.
-       $this->stop("you ran out of time!");
-     } 
-     if($this->timer - $this->beforeMatch > $this->matchTime) {
-       $seconds = $this->timer - $this->beforeMatch;
-       foreach($this->getPlayers() as $p) {
-         $p->sendPopup(str_replace("%s", $seconds, Main::getMessage("duel-countdown")));
-       }
-     }
-    }
+      $this->timer--;
+      if($this->timer - $this->beforeMatch === $this->matchTime) {
+        // Prematch countdown is over, so the round should start.
+        $this->endPreCountdown();
+      }
+      if ($this->timer <= 0) {
+        // Timer has run out, so game should end.
+        $this->stop("you ran out of time!");
+      } 
+      if($this->timer - $this->beforeMatch > $this->matchTime) {
+        $seconds = $this->timer - $this->beforeMatch;
+        foreach($this->getPlayers() as $p) {
+          $p->sendPopup(str_replace("%s", $seconds, Main::getMessage("duel-countdown")));
+        }
+      }
+       elseif($this->timer - $this->beforeMatch < $this->matchTime) {
+          foreach($this->getPlayers() as $p) {
+            $this->sendGameTime($p);
+          }
+        }
+      }
 
     // This is used to start a game AFTER the prematch countdown
     public function startGame() {
-
+      $player1 = $this->players[0];
+      $player2 = $this->players[1];
+      $player1->teleport($this->spawn1);
+      $player2->teleport($this->spawn2);
+      $this->kitHandler($this->players);
     }
 
     public function getPlayers() {
@@ -103,6 +113,25 @@
       foreach($this->getPlayers() as $p) {
         $opposite = $this->getOpponent($p);
         $p->sendPopup(str_replace("%p", $opposite, Main::getMessage("duel-start")));
+      }
+    }
+    
+    public function sendGameTime($p) {
+      $m = $this->timer / 60;
+      $s = $this->timer % 60;
+      if($s < 10) {
+        $s = "0" . $s;
+      }
+      $p->sendPopup(str_replace("%t", $m . ":" . $s, Main::getMessage("duel-timer")));
+    }
+    
+    public function kitHandler($players) {
+      if(!$this->manager->plugin->getConfig()->get("force-kits")) {
+        return;
+      } else {
+        foreach($players as $p) {
+          
+        }
       }
     }
     

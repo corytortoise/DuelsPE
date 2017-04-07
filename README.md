@@ -1,6 +1,8 @@
 # [WIP] DuelsPE
 ### Open source, in-dev PvP plugin for [PocketMine-MP](pmmp.io).
 
+[![Poggit-CI](https://poggit.pmmp.io/ci.badge/corytortoise/DuelsPE/DuelsPE)](https://poggit.pmmp.io/ci/corytortoise/DuelsPE/DuelsPE)
+
 ## Description:
 Simple PvP plugin for PocketMine-MP, based very roughly on Minifixio's 1vs1 plugin. Unfinished. Don't even try to use this plugin yet.
 
@@ -40,7 +42,7 @@ A: This is a question you should be asking yourself. Frankly, I won't(and can't)
  - [ ] Make the best PocketMine PvP plugin ever seen.
 
 ### Commands:
-->/duel create [ 1 | 2 | confirm ] - Creates an arena
+-> /duel create [ 1 | 2 | confirm ] - Creates an arena
 
 -> /duel - Joins the arena queue
 

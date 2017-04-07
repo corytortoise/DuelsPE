@@ -24,16 +24,18 @@ force-kits: true
 
 #Maybe add support for kit plugins later?
 
-#Kit
+#This will only be used if "force-kits" is set to true.
 kit:
+#Kit type. Options: custom, default. 
   type: custom
-#
+#Format: "ID:Damage:Count"
+#Enchantments and Custom Names are planned for implementation.
   items:
-  - id: "276:0:1"
-  - id: "364:0:16"
-  - id: "306:0:1"
-  - id: "307:0:1"
-  - id: "308:0:1"
-  - id: "309:0:1"
+  - "276:0:1"
+  - "364:0:16"
+  - "306:0:1"
+  - "307:0:1"
+  - "308:0:1"
+  - "309:0:1"
   
 
