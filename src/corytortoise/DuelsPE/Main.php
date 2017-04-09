@@ -172,6 +172,14 @@
       }
     } 
     
+    /**
+     * Removes a Player from queue by their NAME, not the Player class.
+     * @param string $player
+     */
+    public function removeFromQueue($player) {
+      unset($this->queue[$player]);
+    }
+    
     public function isArenaAvailable() {
       if($this->getArenaCount() - $this->getActiveArenaCount() >= 1) {
         return true;

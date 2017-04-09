@@ -10,6 +10,9 @@
   namespace corytortoise\DuelsPE;
   
   use pocketmine\level\Location;
+  use pocketmine\item\Item;
+  use pocketmine\entity\Effect;
+  use pocketmine\item\enchantment\Enchantment;
 
   use corytortoise\DuelsPE\GameManager;
 
@@ -53,7 +56,8 @@
      */
     public function addPlayers(array $players) {
       foreach($players as $p) {
-        $this->players[] = $p;
+        $player = $this->manager->plugin->getServer()->getPlayerExact($p);
+        $this->players[] = $player;
       }
     }
 
@@ -117,7 +121,7 @@
     }
     
     public function sendGameTime($p) {
-      $m = $this->timer / 60;
+      $m = floor($this->timer / 60);
       $s = $this->timer % 60;
       if($s < 10) {
         $s = "0" . $s;
@@ -129,20 +133,49 @@
       if(!$this->manager->plugin->getConfig()->get("force-kits")) {
         return;
       } else {
+        $kitData = array();
+        foreach($this->manager->plugin->getConfig()->get("kit") as $data) {
+         $kitData[] = $data;
+        }
         foreach($players as $p) {
-          
+          if($kitData["type"] === "custom") {
+            foreach($kitData["items"] as $itemData) {
+              $parsedData = explode(":", $itemData);
+              $item = Item::get($parsedData[0], $parsedData[1], $parsedData[2]);
+              $enchData = array_slice($itemData, 3);
+              //Credits to AdvancedKits by Luca28pet for this.
+              foreach($enchData as $key => $ench) {
+                if($key % 2 === 0) {
+                  $item->addEnchantment(Enchantment::getEnchantment($ench)->setLevel($enchData[$key + 1]));
+                }
+              }
+              $p->getInventory()->addItem($item);
+            }
+          } else {
+            //TODO: Add fallback kit.
+          }
+        }
+      }
+    }
+    
+    public function removePlayer($player) {
+      foreach($this->players as $p) {
+        if($p->getName() != $player->getName()) {
+          $this->endMatch($p);
+          return;
         }
       }
     }
     
     /**
      * Used when a player or team wins. 
-     * @param Array|Player $winner
+     * @param Player $winner
      */
     public function endMatch($winner) {
-      if(is_array($winner)) {
-        
-      }
+      if($this->manager->plugin->getConfig()->get("duel-end-type") === "all") {
+        $loser = $this->getOpponent($winner);
+        $this->manager->plugin->getServer()->broadcastMessage($this->manager->plugin->getPrefix() . str_replace(["%w", "%l"], [$winner->getName(), $loser->getName()], Main::getMessage("duel-end")));
+        }
     }
     
     /**

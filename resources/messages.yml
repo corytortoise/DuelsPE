@@ -36,7 +36,11 @@ duel-start: "&aDuel against %p has started!"
 #%t = Time left in duel. Format: M:SS
 #Will display as popup.
 duel-timer: "&aTime left in duel: %t"
-duel-end: "&aThe Duel has ended!"
+#%w = Winner's name
+#%l = Loser's name
+duel-end: "&a%w has won a duel against $l!"
+#How should duel-end be displayed? Options: all = All players online, players = Only those who participated in the duel
+duel-end-type: all
 duel-lose: "&cYou lost the duel."
 duel-win: "&aYou won the duel!"
 in-game: "&cYou are already in a duel..."

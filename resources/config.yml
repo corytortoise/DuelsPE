@@ -28,14 +28,21 @@ force-kits: true
 kit:
 #Kit type. Options: custom, default. 
   type: custom
-#Format: "ID:Damage:Count"
-#Enchantments and Custom Names are planned for implementation.
+#Format: "ID:Damage:Count:EnchantmentID:EnchantmentLevel:SecondEnchantmentID:SecondEnchantmentLevel"
+#You can add as many enchantments as you wish.
   items:
-  - "276:0:1"
+  - "276:0:1:9:2"
   - "364:0:16"
-  - "306:0:1"
-  - "307:0:1"
-  - "308:0:1"
-  - "309:0:1"
+  #Format: Armor Type: ID
+  armor:
+    helmet: 306
+    chestplate: 307
+    leggings: 308
+    boots: 309
+  #Format: EffectID:Amplifier:Duration
+  #Leave Amplifier at 0 for lowest level effect, and Duration is in seconds.
+  effects:
+    - "1:0:180"
+    
   
 

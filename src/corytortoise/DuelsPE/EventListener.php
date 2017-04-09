@@ -17,6 +17,8 @@
   use corytortoise\DuelsPE\Main;
 
   class EventListener implements Listener {
+    
+    private $plugin;
 
     public function __construct(Main $plugin) {
       $this->plugin = $plugin;
@@ -24,15 +26,18 @@
 
     public function onDeath(PlayerDeathEvent $event) {
       $player = $event->getPlayer();
-      if($this->plugin->isPlayerInGame($player) === true) {
+      if($this->plugin->isPlayerInGame($player)) {
         $this->plugin->manager()->playerDeath($player);
       }
     }
     
     public function onQuit(PlayerQuitEvent $event) {
       $player = $event->getPlayer();
-      if($this->plugin->isPlayerInGame($player) === true) {
+      if($this->plugin->isPlayerInGame($player)) {
         $this->plugin->manager()->playerDeath($player);
+      }
+      elseif($this->plugin->isPlayerInQueue($player)) {
+        $this->plugin->removeFromQueue($player->getName());
       }
     }
   }
