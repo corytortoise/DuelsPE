@@ -52,4 +52,6 @@ A: This is a question you should be asking yourself. Frankly, I won't(and can't)
 
  - Much of the kit system is inspired by AdvancedKits by Luca28pet. 
 
- - Credit goes to multiple people who have pointed out 
+ - Credit to these people for helping:
+  - sero583
+  - uselesswaifu
