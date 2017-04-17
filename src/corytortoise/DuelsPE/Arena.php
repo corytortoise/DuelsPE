@@ -82,7 +82,7 @@
       if($this->timer - $this->beforeMatch > $this->matchTime) {
         $seconds = $this->timer - $this->beforeMatch;
         foreach($this->getPlayers() as $p) {
-          $p->sendPopup(str_replace("%s", $seconds, Main::getMessage("duel-countdown")));
+         $p->sendPopup(str_replace("%s", $seconds, Main::getMessage("duel-countdown")));
         }
       }
        elseif($this->timer - $this->beforeMatch < $this->matchTime) {
@@ -118,6 +118,7 @@
         $opposite = $this->getOpponent($p);
         $p->sendPopup(str_replace("%p", $opposite, Main::getMessage("duel-start")));
       }
+      $this->startGame();
     }
     
     public function sendGameTime($p) {
@@ -151,6 +152,9 @@
               }
               $p->getInventory()->addItem($item);
             }
+              foreach($kitData["effects"] as $key => $effectData) {
+              
+            }
           } else {
             //TODO: Add fallback kit.
           }
@@ -158,7 +162,7 @@
       }
     }
     
-    public function removePlayer($player) {
+    public function playerDeath($player) {
       foreach($this->players as $p) {
         if($p->getName() != $player->getName()) {
           $this->endMatch($p);

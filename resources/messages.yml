@@ -38,7 +38,7 @@ duel-start: "&aDuel against %p has started!"
 duel-timer: "&aTime left in duel: %t"
 #%w = Winner's name
 #%l = Loser's name
-duel-end: "&a%w has won a duel against $l!"
+duel-end: "&a%w has won a duel against %l!"
 #How should duel-end be displayed? Options: all = All players online, players = Only those who participated in the duel
 duel-end-type: all
 duel-lose: "&cYou lost the duel."

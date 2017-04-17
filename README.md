@@ -47,3 +47,9 @@ A: This is a question you should be asking yourself. Frankly, I won't(and can't)
 -> /duel - Joins the arena queue
 
 -> /duel [username] - Sends a duel request to another player
+
+### Credits:
+
+ - Much of the kit system is inspired by AdvancedKits by Luca28pet. 
+
+ - Credit goes to multiple people who have pointed out 

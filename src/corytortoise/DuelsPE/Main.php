@@ -85,7 +85,7 @@
     }
 
     private function loadArenas() {
-      $this->getLogger()->notice($this->getPrefix() . C::YELLOW . "Loading arenas...");
+      $this->getLogger()->notice($this->getPrefix() . TextFormat::YELLOW . "Loading arenas...");
       foreach($this->data["arenas"] as $arena) {
         $this->manager->loadArena($arena);
       }

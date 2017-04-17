@@ -35,8 +35,7 @@
 
     /**
      * Starts an Arena, beginning with pre-match countdown.
-     * @param Player $player1
-     * @param Player $player2
+     * @param Player[] $players
      */
     public function startArena(array $players) {
       $arena = $this->chooseRandomArena();
@@ -54,15 +53,19 @@
         }
       }
       if(empty($freeArenas)) {
-        return;
+        return null;
       } else {
         return array_rand($freeArenas);
       }
     }
-
+    
+    /**
+     * This will be used later to hopefully prevent side effects of disabling the plugin mid-match
+     */
     public function shutDown() {
 
     }
+    
     /**
     * Gets the arena of a Player.
     * TODO: Use Player ID instead of Username for player management
@@ -80,11 +83,33 @@
     }
     
     /**
-     * 
+     * This function tells the plugin that a player has died.
      * @param Player $loser
      */
     public function playerDeath(Player $loser) {
       $this->getPlayerArena($loser)->removePlayer($loser);
+    }
+    
+    /**
+     * Returns an array of all loaded arenas
+     * @return Arena[] $arenas
+     */
+    public function getArenas() {
+      return $this->arenas;
+    }
+    
+    /**
+     * Returns the amount of players in a match
+     * @return int $count
+     */
+    public function getActivePlayers() {
+      $count = 0;
+      foreach($this->arenas as $arena) {
+        foreach($arena->getPlayers() as $p) {
+          $count++;
+        }
+      }
+      return $count;
     }
 
   }
